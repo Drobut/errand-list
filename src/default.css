@@ -1,7 +1,49 @@
 body {
-    background-color: #f5f5f5;
+  background-color: #f0f0f0;
 }
 
 .center-adjustment {
-    height: 100vh;
+  height: 100vh;
+}
+
+#meta {
+  transition: 0.8s all;
+  margin-right: 12px;
+  width: 25px;
+}
+
+#meta:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+#google {
+  transition: 0.8s all;
+  margin-right: 12px;
+  width: 22px;
+}
+
+#google:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+#linkedin {
+  width: 22px;
+  transition: 0.8s all;
+}
+
+#linkedin:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+#useYourEmail {
+  color: #b8b8b8;
+}
+
+h4,
+h6,
+h7 {
+  cursor: default;
 }
