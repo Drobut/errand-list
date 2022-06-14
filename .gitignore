@@ -7,5 +7,5 @@
 /build
 
 # files
-# configs.txt
+configs.txt
 package-lock.json

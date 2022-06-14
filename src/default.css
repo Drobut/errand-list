@@ -47,3 +47,16 @@ h6,
 h7 {
   cursor: default;
 }
+
+.fadeOut {
+  animation: fadeOut 5s backwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0%;
+  }
+}
