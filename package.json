@@ -1,29 +1,36 @@
 {
   "name": "errand-list",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Developed to study technologies such as: Typescript, Bootstrap, Google typescript style, Html and CSS.",
+  "main": ".prettierrc.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
     "fix": "gts fix",
-    "prepare": "npm.cmd run compile",
-    "pretest": "npm.cmd run compile",
-    "posttest": "npm.cmd run lint"
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Drobut/errand-list.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Drobut/errand-list/issues"
+  },
+  "homepage": "https://github.com/Drobut/errand-list#readme",
   "dependencies": {
-    "crypto": "^1.0.1",
     "gts": "^3.1.0",
-    "sqlite3": "^5.0.8",
-    "typescript": "^4.7.3"
+    "typescript": "^4.7.4"
   },
   "devDependencies": {
-    "@types/node": "^14.11.2",
-    "@types/sqlite3": "^3.1.8"
+    "gts": "^3.1.0",
+    "typescript": "^4.0.3",
+    "@types/node": "^14.11.2"
   }
 }
