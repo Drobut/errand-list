@@ -1,6 +1,9 @@
 const local = JSON.parse(localStorage.getItem('users') || '[]');
 
 const emailLogin = document.getElementById('email') as HTMLInputElement;
+const registerAlertLogin = document.getElementById(
+  'registerAlert'
+) as HTMLElement;
 const passwordBufferLogin = document.getElementById(
   'password'
 ) as HTMLInputElement;
@@ -45,4 +48,48 @@ navigatorHome.onclick = () => {
   window.location.href = 'home-page.html';
 };
 
-signIpButton.onclick = () => {};
+signIpButton.onclick = () => {
+  let indexUserLogged = null;
+  local.forEach(
+    (user: {email: string; passwordBuffer: string}, index: unknown) => {
+      if (
+        user.email === emailLogin.value &&
+        user.passwordBuffer === passwordBufferLogin.value
+      ) {
+        indexUserLogged = index;
+      }
+    }
+  );
+
+  if (indexUserLogged === null) {
+    messageAlertLogin();
+  } else {
+    localStorage.setItem('indexUserLogged', indexUserLogged);
+    window.location.href = 'errand-list.html';
+  }
+};
+
+function messageAlertLogin() {
+  const registerAlerts = document.createElement('div');
+  if (registerAlertLogin) {
+    registerAlerts.innerHTML =
+      '<div class="registerAlertInner" id="registerAlertInner">' +
+      '<div class="alert alert-danger mt-1 mb-4" role="alert">' +
+      'Email or password is invalid ' +
+      '<a href="home-page.html" class="alert-link"' +
+      '>click here to sign up</a>.';
+    registerAlertLogin?.append(registerAlerts);
+    registerAlertLogin.classList.toggle('fadeOut');
+    signIpButton.setAttribute('disabled', 'disabled');
+  }
+  signIpButton.setAttribute('class', 'btn btn-primary mb-5');
+  messageAlertFadeOutLogin();
+}
+
+function messageAlertFadeOutLogin() {
+  setInterval(() => {
+    document.getElementById('registerAlertInner')?.remove();
+    registerAlert.classList.remove('fadeOut');
+    signIpButton.setAttribute('class', 'btn btn-primary mb-5 mt-3');
+  }, 5000);
+}
