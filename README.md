@@ -1,4 +1,4 @@
-﻿# **Erand List**
+﻿# **Errand List**
 
 Developed to study technologies such as: Typescript, Bootstrap, Google typescript style, Html and CSS.
 
