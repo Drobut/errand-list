@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc",
     "prepare": "npm run compile",
-    "pretest": "npm run compile"
+    "pretest": "npm run compile",
+    "build": "npx tsc"
   },
   "repository": {
     "type": "git",
