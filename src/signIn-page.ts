@@ -1,21 +1,22 @@
-const local = JSON.parse(localStorage.getItem('users') || '[]');
+localStorage.clear();
+const local = JSON.parse(localStorage.getItem("id") || "[]");
 
-const emailLogin = document.getElementById('email') as HTMLInputElement;
+const emailLogin = document.getElementById("email") as HTMLInputElement;
 const registerAlertLogin = document.getElementById(
-  'registerAlert'
+  "registerAlert"
 ) as HTMLElement;
 const passwordBufferLogin = document.getElementById(
-  'password'
+  "password"
 ) as HTMLInputElement;
 const navigatorHome = document.getElementById(
-  'navigatorHome'
+  "navigatorHome"
 ) as HTMLButtonElement;
 const signIpButton = document.getElementById(
-  'signIpButton'
+  "signIpButton"
 ) as HTMLButtonElement;
 
-emailLogin.addEventListener('keyup', enableButtonLogin);
-passwordBufferLogin.addEventListener('keyup', enableButtonLogin);
+emailLogin.addEventListener("keyup", enableButtonLogin);
+passwordBufferLogin.addEventListener("keyup", enableButtonLogin);
 
 function emailvalidatorLogin() {
   const filter = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
@@ -37,59 +38,69 @@ function passwordValidatorLogin() {
 
 function enableButtonLogin() {
   if (passwordValidatorLogin() === true && emailvalidatorLogin() === true) {
-    signIpButton.removeAttribute('disabled');
+    signIpButton.removeAttribute("disabled");
   } else {
-    signIpButton.setAttribute('disabled', 'disabled');
+    signIpButton.setAttribute("disabled", "disabled");
     passwordValidatorLogin();
   }
 }
 
 navigatorHome.onclick = () => {
-  window.location.href = 'home-page.html';
+  window.location.href = "home-page.html";
 };
 
 signIpButton.onclick = () => {
-  let indexUserLogged = null;
-  local.forEach(
-    (user: {email: string; passwordBuffer: string}, index: unknown) => {
-      if (
-        user.email === emailLogin.value &&
-        user.passwordBuffer === passwordBufferLogin.value
-      ) {
-        indexUserLogged = index;
-      }
-    }
-  );
+  const data = {
+    email: email.value,
+    password: passwordBufferLogin.value,
+  };
 
-  if (indexUserLogged === null) {
-    messageAlertLogin();
-  } else {
-    localStorage.setItem('indexUserLogged', indexUserLogged);
-    window.location.href = 'errand-list.html';
-  }
+  const user = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  };
+
+  fetch("http://localhost:3333/user/login", user)
+    .then((response) => response.json())
+    .then((user) => {
+      if (user.error) {
+        messageAlertLogin();
+      } else {
+        localStorage.clear();
+        local.push(user);
+        localStorage.setItem("ids", JSON.stringify(local));
+        window.location.href = "errand-list.html";
+      }
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 };
 
 function messageAlertLogin() {
-  const registerAlerts = document.createElement('div');
+  const registerAlerts = document.createElement("div");
   if (registerAlertLogin) {
     registerAlerts.innerHTML =
       '<div class="registerAlertInner" id="registerAlertInner">' +
       '<div class="alert alert-danger mt-1 mb-4" role="alert">' +
-      'Email or password is invalid ' +
+      "Email or password is invalid " +
       '<a href="home-page.html" class="alert-link"' +
-      '>click here to sign up</a>.';
+      ">click here to sign up</a>.";
     registerAlertLogin?.append(registerAlerts);
-    registerAlertLogin.classList.toggle('fadeOut');
-    signIpButton.setAttribute('disabled', 'disabled');
+    registerAlertLogin.classList.toggle("fadeOut");
+    signIpButton.setAttribute("disabled", "disabled");
   }
-  signIpButton.setAttribute('class', 'btn btn-primary mb-5');
+  signIpButton.setAttribute("class", "btn btn-primary mb-5");
   messageAlertFadeOutLogin();
 }
 
 function messageAlertFadeOutLogin() {
   setInterval(() => {
-    document.getElementById('registerAlertInner')?.remove();
-    registerAlert.classList.remove('fadeOut');
-    signIpButton.setAttribute('class', 'btn btn-primary mb-5 mt-3');
+    document.getElementById("registerAlertInner")?.remove();
+    registerAlert.classList.remove("fadeOut");
+    signIpButton.setAttribute("class", "btn btn-primary mb-5 mt-3");
   }, 5000);
 }
