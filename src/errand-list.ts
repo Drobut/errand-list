@@ -25,7 +25,10 @@ addBtn.onclick = () => {
     body: JSON.stringify(data),
   };
 
-  fetch(`http://localhost:3333/user/${idUser}/errand`, card).catch((e) => {
+  fetch(
+    `https://crud-tasks-api.onrender.com/user/${idUser}/errand`,
+    card
+  ).catch((e) => {
     console.log(e);
   });
 
@@ -53,11 +56,12 @@ function editCards(id: string) {
     body: JSON.stringify(data),
   };
 
-  fetch(`http://localhost:3333/user/${idUser}/errand/${id}`, edit).catch(
-    (e) => {
-      console.log(e);
-    }
-  );
+  fetch(
+    `https://crud-tasks-api.onrender.com/user/${idUser}/errand/${id}`,
+    edit
+  ).catch((e) => {
+    console.log(e);
+  });
 
   renderCards();
 }
@@ -71,15 +75,16 @@ function deleteCards(id: string) {
     },
   };
 
-  fetch(`http://localhost:3333/user/${idUser}/errand/${id}`, dell).then((res) =>
-    res.text()
-  );
+  fetch(
+    `https://crud-tasks-api.onrender.com/user/${idUser}/errand/${id}`,
+    dell
+  ).then((res) => res.text());
 
   renderCards();
 }
 
 function renderCards() {
-  fetch(`http://localhost:3333/user/${idUser}`)
+  fetch(`https://crud-tasks-api.onrender.com/user/${idUser}`)
     .then((reponse) => reponse.json())
     .then((user) => {
       const cardsEle = document.querySelector("#cards") as HTMLElement;

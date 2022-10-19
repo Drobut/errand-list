@@ -60,7 +60,7 @@ signUpButtonLogin.onclick = () => {
     body: JSON.stringify(data),
   };
 
-  fetch("http://localhost:3333/user", user)
+  fetch(`https://crud-tasks-api.onrender.com/user`, user)
     .then((response) => response.json())
     .then((user) => {
       if (user.error) {
