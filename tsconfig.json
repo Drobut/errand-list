@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "lib": ["dom"],
-    "outDir": "build"
+    "outDir": "./dist",
   },
   "include": [
     "src/**/*.ts",
